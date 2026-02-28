@@ -1,5 +1,5 @@
 /* ============================================
-   Admin Dashboard Styles
+   Admin Dashboard — Clean & Warm
    ============================================ */
 
 .admin-container {
@@ -12,17 +12,11 @@
 
 .admin-card {
     width: 100%;
-    max-width: 960px;
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 24px;
+    max-width: 900px;
+    background: #fff;
+    border-radius: 16px;
     padding: 2.5rem;
-    box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.3),
-        0 0 0 1px rgba(255, 255, 255, 0.05);
-    animation: fadeInUp 0.6s ease-out;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
 /* ---------- Header ---------- */
@@ -30,119 +24,115 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 2rem;
+    margin-bottom: 1.75rem;
     flex-wrap: wrap;
     gap: 1rem;
 }
 
 .admin-header h1 {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 700;
-    background: linear-gradient(135deg, #a78bfa, #818cf8, #6366f1);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 0.2rem;
+    color: #2d2a26;
+    margin-bottom: 0.15rem;
 }
 
 .admin-subtitle {
-    color: rgba(255, 255, 255, 0.45);
-    font-size: 0.9rem;
+    color: #8a8580;
+    font-size: 0.85rem;
 }
 
 .btn-back {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    padding: 0.6rem 1.2rem;
+    gap: 0.3rem;
+    padding: 0.5rem 1rem;
     font-family: inherit;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.7);
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 10px;
+    color: #5c5651;
+    background: #f8f6f3;
+    border: 1.5px solid #e5e0db;
+    border-radius: 8px;
     text-decoration: none;
     cursor: pointer;
-    transition: all 0.25s ease;
+    transition: border-color 0.2s ease;
 }
 
 .btn-back:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.2);
-    color: #fff;
+    border-color: #c4956a;
+    color: #2d2a26;
 }
 
 /* ---------- Options Summary ---------- */
 .options-summary {
-    margin-bottom: 2rem;
+    margin-bottom: 1.75rem;
 }
 
 .summary-title {
-    font-size: 0.95rem;
+    font-size: 0.8rem;
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.6);
+    color: #8a8580;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 1rem;
+    letter-spacing: 0.8px;
+    margin-bottom: 0.75rem;
 }
 
 .summary-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 0.75rem;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.6rem;
 }
 
 .summary-card {
-    padding: 1rem 1.2rem;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
+    padding: 0.85rem 1rem;
+    background: #f8f6f3;
+    border: 1.5px solid #e5e0db;
+    border-radius: 10px;
 }
 
 .summary-name {
     display: block;
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.85);
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
+    color: #2d2a26;
+    font-size: 0.85rem;
+    margin-bottom: 0.4rem;
 }
 
 .summary-bar-track {
-    height: 6px;
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 6px;
+    height: 5px;
+    background: #e5e0db;
+    border-radius: 5px;
     overflow: hidden;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
 }
 
 .summary-bar-fill {
     height: 100%;
-    background: linear-gradient(90deg, #818cf8, #6366f1);
-    border-radius: 6px;
+    background: #c4956a;
+    border-radius: 5px;
     transition: width 0.5s ease;
 }
 
 .summary-bar-fill.warning {
-    background: linear-gradient(90deg, #f59e0b, #fbbf24);
+    background: #e0a84e;
 }
 
 .summary-bar-fill.critical {
-    background: linear-gradient(90deg, #ef4444, #f87171);
+    background: #d46a5e;
 }
 
 .summary-numbers {
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.55);
+    font-size: 0.78rem;
+    color: #8a8580;
 }
 
 .summary-numbers strong {
-    color: rgba(255, 255, 255, 0.85);
+    color: #2d2a26;
 }
 
 .summary-left {
-    margin-left: 0.35rem;
-    color: rgba(255, 255, 255, 0.35);
+    margin-left: 0.3rem;
+    color: #bbb5ae;
 }
 
 /* ---------- States ---------- */
@@ -150,81 +140,77 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
+    gap: 0.6rem;
     padding: 3rem;
-    color: rgba(255, 255, 255, 0.45);
-    font-size: 0.9rem;
+    color: #8a8580;
+    font-size: 0.88rem;
 }
 
 .admin-error {
-    padding: 1.25rem;
-    border-radius: 12px;
-    background: rgba(239, 68, 68, 0.1);
-    border: 1px solid rgba(239, 68, 68, 0.25);
-    color: #fca5a5;
-    font-size: 0.9rem;
-    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border-radius: 10px;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #b91c1c;
+    font-size: 0.88rem;
+    margin-bottom: 1.25rem;
     line-height: 1.6;
 }
 
 .admin-error small {
-    color: rgba(252, 165, 165, 0.6);
+    color: #dc7171;
 }
 
 .admin-empty {
     text-align: center;
     padding: 3rem;
-    color: rgba(255, 255, 255, 0.4);
+    color: #8a8580;
 }
 
 .empty-icon {
-    font-size: 2.5rem;
+    font-size: 2rem;
     display: block;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.6rem;
 }
 
 /* ---------- Table ---------- */
 .table-wrapper {
     overflow-x: auto;
-    border-radius: 14px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    border: 1.5px solid #e5e0db;
 }
 
 .admin-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.88rem;
+    font-size: 0.85rem;
 }
 
 .admin-table thead {
-    background: rgba(255, 255, 255, 0.05);
+    background: #f8f6f3;
 }
 
 .admin-table th {
     text-align: left;
-    padding: 0.85rem 1rem;
+    padding: 0.75rem 0.85rem;
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.55);
-    font-size: 0.78rem;
+    color: #8a8580;
+    font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 0.8px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    letter-spacing: 0.6px;
+    border-bottom: 1.5px solid #e5e0db;
     white-space: nowrap;
 }
 
 .admin-table td {
-    padding: 0.85rem 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-    color: rgba(255, 255, 255, 0.8);
+    padding: 0.75rem 0.85rem;
+    border-bottom: 1px solid #f0ece8;
+    color: #2d2a26;
     vertical-align: middle;
 }
 
-.admin-table tbody tr {
-    transition: background 0.2s ease;
-}
-
 .admin-table tbody tr:hover {
-    background: rgba(255, 255, 255, 0.03);
+    background: #fcfaf8;
 }
 
 .admin-table tbody tr:last-child td {
@@ -232,9 +218,9 @@
 }
 
 .cell-num {
-    color: rgba(255, 255, 255, 0.3);
-    font-size: 0.8rem;
-    width: 40px;
+    color: #bbb5ae;
+    font-size: 0.78rem;
+    width: 36px;
 }
 
 .cell-name {
@@ -244,64 +230,53 @@
 
 .cell-email a,
 .cell-phone a {
-    color: #818cf8;
+    color: #c4956a;
     text-decoration: none;
-    transition: color 0.2s ease;
 }
 
 .cell-email a:hover,
 .cell-phone a:hover {
-    color: #a5b4fc;
     text-decoration: underline;
 }
 
 .cell-date {
     white-space: nowrap;
-    color: rgba(255, 255, 255, 0.45);
-    font-size: 0.8rem;
+    color: #8a8580;
+    font-size: 0.78rem;
 }
 
 /* ---------- Option Tags ---------- */
 .option-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.35rem;
+    gap: 0.3rem;
 }
 
 .option-tag {
     display: inline-block;
-    padding: 0.2rem 0.6rem;
-    font-size: 0.75rem;
+    padding: 0.15rem 0.5rem;
+    font-size: 0.72rem;
     font-weight: 500;
-    border-radius: 6px;
-    background: rgba(129, 140, 248, 0.12);
-    color: #a5b4fc;
+    border-radius: 5px;
+    background: #fdf6ef;
+    color: #946b2d;
     white-space: nowrap;
 }
 
 .no-options {
-    color: rgba(255, 255, 255, 0.3);
+    color: #bbb5ae;
     font-style: italic;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
 }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 640px) {
     .admin-card {
-        padding: 1.5rem;
+        padding: 1.25rem;
     }
 
     .admin-header {
         flex-direction: column;
         align-items: flex-start;
-    }
-
-    .admin-table {
-        font-size: 0.82rem;
-    }
-
-    .admin-table th,
-    .admin-table td {
-        padding: 0.65rem 0.75rem;
     }
 }
