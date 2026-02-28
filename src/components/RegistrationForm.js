@@ -217,10 +217,10 @@ export default function RegistrationForm() {
                     <div className="form-section">
                         <h2 className="section-title">
                             <span className="section-icon">📋</span>
-                            Wybierz opcje
+                            Wybierz opcję
                         </h2>
                         <p className="section-description">
-                            Wybierz opcje, na które chcesz się zapisać. Liczba miejsc jest
+                            Wybierz opcję, na którą chcesz się zapisać. Liczba miejsc jest
                             ograniczona!
                         </p>
 
