@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/savionalia-form/static/css/main.377abcf1.css",
-    "main.js": "/savionalia-form/static/js/main.eee14f6f.js",
+    "main.js": "/savionalia-form/static/js/main.6000fb15.js",
     "static/js/453.76f223c4.chunk.js": "/savionalia-form/static/js/453.76f223c4.chunk.js",
     "index.html": "/savionalia-form/index.html",
     "main.377abcf1.css.map": "/savionalia-form/static/css/main.377abcf1.css.map",
-    "main.eee14f6f.js.map": "/savionalia-form/static/js/main.eee14f6f.js.map",
+    "main.6000fb15.js.map": "/savionalia-form/static/js/main.6000fb15.js.map",
     "453.76f223c4.chunk.js.map": "/savionalia-form/static/js/453.76f223c4.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.377abcf1.css",
-    "static/js/main.eee14f6f.js"
+    "static/js/main.6000fb15.js"
   ]
 }
