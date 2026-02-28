@@ -1,24 +1,24 @@
-# Savionalia — Formularz Rejestracji
+# Savionalia — Registration Form
 
-Prosty formularz rejestracyjny na wydarzenie Savionalia, zbudowany w React z backendem Firebase Firestore.
+A simple registration form for the Savionalia youth event, built with React and Firebase Firestore.
 
-## Funkcje
+## Features
 
-- **Dynamiczne pola formularza** — pola (imię, nazwisko, e-mail, telefon itp.) konfigurowane z Firestore, bez zmian w kodzie
-- **Wybór warsztatów z licznikiem miejsc** — użytkownik widzi na żywo ile miejsc zostało; po zapisie licznik automatycznie się zmniejsza
-- **Atomowe transakcje** — rejestracja i zmniejszenie liczby miejsc odbywają się w jednej transakcji Firestore, bezpiecznie przy wielu użytkownikach jednocześnie
-- **Panel administracyjny** (`/#/admin`) — tabela ze wszystkimi zgłoszeniami i podsumowanie zajętych miejsc
-- **Invisible reCAPTCHA** — ochrona przed botami bez dodatkowych kliknięć
-- **Hosting na GitHub Pages** — szybki deploy jednym poleceniem `npm run deploy`
+- **Dynamic form fields** — fields (name, email, phone, etc.) are configured in Firestore, no code changes needed
+- **Workshop selection with live spot counter** — users see how many spots are left in real time; the counter decreases automatically on registration
+- **Atomic transactions** — registration and spot decrement happen in a single Firestore transaction, safe for concurrent users
+- **Admin dashboard** (`/#/admin`) — a table of all submissions with a spots overview summary
+- **Invisible reCAPTCHA** — bot protection without extra clicks for users
+- **GitHub Pages hosting** — one-command deploy with `npm run deploy`
 
-## Technologie
+## Tech Stack
 
 - React (Create React App)
 - Firebase Firestore
 - react-google-recaptcha
 - GitHub Pages (gh-pages)
 
-## Uruchomienie lokalne
+## Local Development
 
 ```bash
 npm install
@@ -31,8 +31,8 @@ npm start
 npm run deploy
 ```
 
-## Konfiguracja
+## Configuration
 
-1. Ustaw dane Firebase w `src/firebase.js`
-2. Klucz reCAPTCHA w `src/components/RegistrationForm.js`
-3. Edytuj opcje i pola formularza w `src/seedOptions.js`, a następnie uruchom `node src/seedOptions.js`
+1. Set your Firebase config in `src/firebase.js`
+2. Set your reCAPTCHA site key in `src/components/RegistrationForm.js`
+3. Edit options and form fields in `src/seedOptions.js`, then run `node src/seedOptions.js`
