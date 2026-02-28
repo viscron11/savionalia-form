@@ -5,8 +5,8 @@ import { useFormConfig } from "../hooks/useFormConfig";
 import { submitRegistration } from "../services/submitRegistration";
 import "./RegistrationForm.css";
 
-// TODO: Replace with your actual reCAPTCHA v2 site key
-const RECAPTCHA_SITE_KEY = "6LeAzXosAAAAAFVj-qApYWIjHGq_x6NDIydZZ56z";
+// Replace with your invisible reCAPTCHA v2 site key
+const RECAPTCHA_SITE_KEY = "6Lewz3osAAAAAOmsNbVOzHjtAjY2BREeS1T4n4Hi";
 
 export default function RegistrationForm() {
     const { options, loading: optionsLoading, error: optionsError } = useOptions();
@@ -17,7 +17,6 @@ export default function RegistrationForm() {
     const [submitting, setSubmitting] = useState(false);
     const [submitted, setSubmitted] = useState(false);
     const [formError, setFormError] = useState(null);
-    const [captchaToken, setCaptchaToken] = useState(null);
     const captchaRef = useRef(null);
 
     // Initialize formData when config loads
@@ -59,22 +58,23 @@ export default function RegistrationForm() {
             return;
         }
 
-        if (!captchaToken) {
-            setFormError("Proszę potwierdzić, że nie jesteś robotem.");
-            return;
-        }
+        // Trigger invisible reCAPTCHA — submission continues in onCaptchaChange
+        captchaRef.current.execute();
+    };
+
+    const onCaptchaChange = async (token) => {
+        if (!token) return;
 
         setSubmitting(true);
 
         try {
             await submitRegistration(formData, [selectedOption]);
             setSubmitted(true);
-            setCaptchaToken(null);
-            if (captchaRef.current) captchaRef.current.reset();
         } catch (err) {
             setFormError(err.message);
         } finally {
             setSubmitting(false);
+            captchaRef.current.reset();
         }
     };
 
@@ -308,15 +308,13 @@ export default function RegistrationForm() {
                         </div>
                     )}
 
-                    {/* reCAPTCHA */}
-                    <div className="captcha-wrapper">
-                        <ReCAPTCHA
-                            ref={captchaRef}
-                            sitekey={RECAPTCHA_SITE_KEY}
-                            onChange={(token) => setCaptchaToken(token)}
-                            onExpired={() => setCaptchaToken(null)}
-                        />
-                    </div>
+                    {/* Invisible reCAPTCHA */}
+                    <ReCAPTCHA
+                        ref={captchaRef}
+                        sitekey={RECAPTCHA_SITE_KEY}
+                        size="invisible"
+                        onChange={onCaptchaChange}
+                    />
 
                     {/* Submit Button */}
                     <button
