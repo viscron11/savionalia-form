@@ -29,23 +29,22 @@ export default function AdminDashboard() {
             <div className="admin-card">
                 <div className="admin-header">
                     <div>
-                        <h1>Registrations</h1>
+                        <h1>Zgłoszenia</h1>
                         <p className="admin-subtitle">
                             {loading
-                                ? "Loading..."
-                                : `${registrations.length} total registration${registrations.length !== 1 ? "s" : ""
-                                }`}
+                                ? "Ładowanie..."
+                                : `${registrations.length} ${registrations.length === 1 ? "zgłoszenie" : registrations.length < 5 ? "zgłoszenia" : "zgłoszeń"}`}
                         </p>
                     </div>
                     <a href="/" className="btn btn-back">
-                        ← Back to Form
+                        ← Wróć do formularza
                     </a>
                 </div>
 
                 {/* Options Summary */}
                 {options.length > 0 && (
                     <div className="options-summary">
-                        <h2 className="summary-title">Spots Overview</h2>
+                        <h2 className="summary-title">Podsumowanie miejsc</h2>
                         <div className="summary-cards">
                             {options.map((opt) => {
                                 const taken = opt.totalSpots - opt.spotsLeft;
@@ -64,9 +63,9 @@ export default function AdminDashboard() {
                                             ></div>
                                         </div>
                                         <span className="summary-numbers">
-                                            <strong>{taken}</strong> / {opt.totalSpots} taken
+                                            <strong>{taken}</strong> / {opt.totalSpots} zajętych
                                             <span className="summary-left">
-                                                ({opt.spotsLeft} left)
+                                                (zostało {opt.spotsLeft})
                                             </span>
                                         </span>
                                     </div>
@@ -79,11 +78,10 @@ export default function AdminDashboard() {
                 {/* Error */}
                 {error && (
                     <div className="admin-error">
-                        ⚠️ Error loading registrations: {error}
+                        ⚠️ Błąd ładowania zgłoszeń: {error}
                         <br />
                         <small>
-                            Make sure Firestore rules allow reading registrations for this
-                            page.
+                            Upewnij się, że reguły Firestore pozwalają na odczyt zgłoszeń.
                         </small>
                     </div>
                 )}
@@ -92,7 +90,7 @@ export default function AdminDashboard() {
                 {loading && (
                     <div className="admin-loading">
                         <div className="spinner"></div>
-                        <span>Loading registrations...</span>
+                        <span>Ładowanie zgłoszeń...</span>
                     </div>
                 )}
 
@@ -100,7 +98,7 @@ export default function AdminDashboard() {
                 {!loading && !error && registrations.length === 0 && (
                     <div className="admin-empty">
                         <span className="empty-icon">📭</span>
-                        <p>No registrations yet.</p>
+                        <p>Brak zgłoszeń.</p>
                     </div>
                 )}
 
@@ -110,11 +108,11 @@ export default function AdminDashboard() {
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Selected Options</th>
-                                    <th>Date</th>
+                                    <th>Imię i nazwisko</th>
+                                    <th>E-mail</th>
+                                    <th>Telefon</th>
+                                    <th>Wybrane opcje</th>
+                                    <th>Data</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -140,7 +138,7 @@ export default function AdminDashboard() {
                                                     ))}
                                                 </div>
                                             ) : (
-                                                <span className="no-options">None</span>
+                                                <span className="no-options">Brak</span>
                                             )}
                                         </td>
                                         <td className="cell-date">{formatDate(reg.createdAt)}</td>

@@ -28,12 +28,12 @@ export async function submitRegistration(formData, selectedOptionIds) {
         for (let i = 0; i < optionSnaps.length; i++) {
             const snap = optionSnaps[i];
             if (!snap.exists()) {
-                throw new Error(`Option "${selectedOptionIds[i]}" does not exist.`);
+                throw new Error(`Opcja "${selectedOptionIds[i]}" nie istnieje.`);
             }
             const data = snap.data();
             if (data.spotsLeft <= 0) {
                 throw new Error(
-                    `Sorry, "${data.name}" has no spots left. Please refresh and try again.`
+                    `Przepraszamy, "${data.name}" nie ma już wolnych miejsc. Odśwież stronę i spróbuj ponownie.`
                 );
             }
         }

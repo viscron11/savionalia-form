@@ -37,19 +37,19 @@ export default function RegistrationForm() {
 
         // Validation
         if (!formData.firstName.trim() || !formData.lastName.trim()) {
-            setFormError("Please fill in your first and last name.");
+            setFormError("Proszę podać imię i nazwisko.");
             return;
         }
         if (!formData.email.trim()) {
-            setFormError("Please provide your email address.");
+            setFormError("Proszę podać adres e-mail.");
             return;
         }
         if (!formData.phone.trim()) {
-            setFormError("Please provide your phone number.");
+            setFormError("Proszę podać numer telefonu.");
             return;
         }
         if (selectedOptions.length === 0) {
-            setFormError("Please select at least one option.");
+            setFormError("Proszę wybrać przynajmniej jedną opcję.");
             return;
         }
 
@@ -70,8 +70,8 @@ export default function RegistrationForm() {
             <div className="form-container">
                 <div className="success-card">
                     <div className="success-icon">✓</div>
-                    <h2>Registration Successful!</h2>
-                    <p>Thank you, {formData.firstName}! Your registration has been submitted.</p>
+                    <h2>Rejestracja zakończona!</h2>
+                    <p>Dziękujemy, {formData.firstName}! Twoje zgłoszenie zostało wysłane.</p>
                     <button
                         className="btn btn-primary"
                         onClick={() => {
@@ -80,7 +80,7 @@ export default function RegistrationForm() {
                             setSelectedOptions([]);
                         }}
                     >
-                        Submit Another Response
+                        Wyślij kolejne zgłoszenie
                     </button>
                 </div>
             </div>
@@ -91,8 +91,8 @@ export default function RegistrationForm() {
         <div className="form-container">
             <div className="form-card">
                 <div className="form-header">
-                    <h1>Registration Form</h1>
-                    <p className="form-subtitle">Fill in your details and choose your options</p>
+                    <h1>Formularz rejestracji</h1>
+                    <p className="form-subtitle">Wypełnij dane i wybierz swoje opcje</p>
                 </div>
 
                 <form onSubmit={handleSubmit} noValidate>
@@ -100,17 +100,17 @@ export default function RegistrationForm() {
                     <div className="form-section">
                         <h2 className="section-title">
                             <span className="section-icon">👤</span>
-                            Personal Information
+                            Dane osobowe
                         </h2>
 
                         <div className="fields-grid">
                             <div className="field-group">
-                                <label htmlFor="firstName">First Name</label>
+                                <label htmlFor="firstName">Imię</label>
                                 <input
                                     id="firstName"
                                     name="firstName"
                                     type="text"
-                                    placeholder="Enter your first name"
+                                    placeholder="Wpisz swoje imię"
                                     value={formData.firstName}
                                     onChange={handleInputChange}
                                     required
@@ -118,12 +118,12 @@ export default function RegistrationForm() {
                             </div>
 
                             <div className="field-group">
-                                <label htmlFor="lastName">Last Name</label>
+                                <label htmlFor="lastName">Nazwisko</label>
                                 <input
                                     id="lastName"
                                     name="lastName"
                                     type="text"
-                                    placeholder="Enter your last name"
+                                    placeholder="Wpisz swoje nazwisko"
                                     value={formData.lastName}
                                     onChange={handleInputChange}
                                     required
@@ -145,7 +145,7 @@ export default function RegistrationForm() {
                         </div>
 
                         <div className="field-group">
-                            <label htmlFor="phone">Phone Number</label>
+                            <label htmlFor="phone">Numer telefonu</label>
                             <input
                                 id="phone"
                                 name="phone"
@@ -162,22 +162,22 @@ export default function RegistrationForm() {
                     <div className="form-section">
                         <h2 className="section-title">
                             <span className="section-icon">📋</span>
-                            Choose Your Options
+                            Wybierz opcje
                         </h2>
                         <p className="section-description">
-                            Select the options you'd like to register for. Spots are limited!
+                            Wybierz opcje, na które chcesz się zapisać. Liczba miejsc jest ograniczona!
                         </p>
 
                         {loading && (
                             <div className="options-loading">
                                 <div className="spinner"></div>
-                                <span>Loading available options...</span>
+                                <span>Ładowanie dostępnych opcji...</span>
                             </div>
                         )}
 
                         {error && (
                             <div className="options-error">
-                                Failed to load options: {error}
+                                Nie udało się załadować opcji: {error}
                             </div>
                         )}
 
@@ -212,10 +212,10 @@ export default function RegistrationForm() {
                                                 <div className="spots-bar-container">
                                                     <div
                                                         className={`spots-bar ${spotsPercent <= 20
-                                                                ? "critical"
-                                                                : spotsPercent <= 50
-                                                                    ? "warning"
-                                                                    : ""
+                                                            ? "critical"
+                                                            : spotsPercent <= 50
+                                                                ? "warning"
+                                                                : ""
                                                             }`}
                                                         style={{ width: `${spotsPercent}%` }}
                                                     ></div>
@@ -225,18 +225,17 @@ export default function RegistrationForm() {
                                             <div className="spots-badge-wrapper">
                                                 <span
                                                     className={`spots-badge ${isFull
-                                                            ? "badge-full"
-                                                            : option.spotsLeft <= 5
-                                                                ? "badge-critical"
-                                                                : option.spotsLeft <= 10
-                                                                    ? "badge-warning"
-                                                                    : ""
+                                                        ? "badge-full"
+                                                        : option.spotsLeft <= 5
+                                                            ? "badge-critical"
+                                                            : option.spotsLeft <= 10
+                                                                ? "badge-warning"
+                                                                : ""
                                                         }`}
                                                 >
                                                     {isFull
-                                                        ? "FULL"
-                                                        : `${option.spotsLeft} spot${option.spotsLeft !== 1 ? "s" : ""
-                                                        } available`}
+                                                        ? "BRAK MIEJSC"
+                                                        : `${option.spotsLeft} ${option.spotsLeft === 1 ? "miejsce" : option.spotsLeft < 5 ? "miejsca" : "miejsc"}`}
                                                 </span>
                                             </div>
                                         </label>
@@ -263,10 +262,10 @@ export default function RegistrationForm() {
                         {submitting ? (
                             <>
                                 <span className="btn-spinner"></span>
-                                Submitting...
+                                Wysyłanie...
                             </>
                         ) : (
-                            "Submit Registration"
+                            "Wyślij zgłoszenie"
                         )}
                     </button>
                 </form>
