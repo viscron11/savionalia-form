@@ -1,16 +1,21 @@
 import { useRegistrations } from "../hooks/useRegistrations";
 import { useOptions } from "../hooks/useOptions";
+import { useFormConfig } from "../hooks/useFormConfig";
 import "./AdminDashboard.css";
 
 export default function AdminDashboard() {
     const { registrations, loading, error } = useRegistrations();
     const { options } = useOptions();
+    const { config } = useFormConfig();
 
     // Build a map of option IDs → names for display
     const optionNameMap = {};
     options.forEach((opt) => {
         optionNameMap[opt.id] = opt.name;
     });
+
+    // Get field definitions from config
+    const fields = config?.fields || [];
 
     const formatDate = (timestamp) => {
         if (!timestamp) return "—";
@@ -33,7 +38,12 @@ export default function AdminDashboard() {
                         <p className="admin-subtitle">
                             {loading
                                 ? "Ładowanie..."
-                                : `${registrations.length} ${registrations.length === 1 ? "zgłoszenie" : registrations.length < 5 ? "zgłoszenia" : "zgłoszeń"}`}
+                                : `${registrations.length} ${registrations.length === 1
+                                    ? "zgłoszenie"
+                                    : registrations.length < 5
+                                        ? "zgłoszenia"
+                                        : "zgłoszeń"
+                                }`}
                         </p>
                     </div>
                     <a href="/" className="btn btn-back">
@@ -94,7 +104,7 @@ export default function AdminDashboard() {
                     </div>
                 )}
 
-                {/* Table */}
+                {/* Empty */}
                 {!loading && !error && registrations.length === 0 && (
                     <div className="admin-empty">
                         <span className="empty-icon">📭</span>
@@ -102,15 +112,16 @@ export default function AdminDashboard() {
                     </div>
                 )}
 
+                {/* Table */}
                 {!loading && !error && registrations.length > 0 && (
                     <div className="table-wrapper">
                         <table className="admin-table">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Imię i nazwisko</th>
-                                    <th>E-mail</th>
-                                    <th>Telefon</th>
+                                    {fields.map((field) => (
+                                        <th key={field.id}>{field.label}</th>
+                                    ))}
                                     <th>Wybrane opcje</th>
                                     <th>Data</th>
                                 </tr>
@@ -119,17 +130,24 @@ export default function AdminDashboard() {
                                 {registrations.map((reg, index) => (
                                     <tr key={reg.id}>
                                         <td className="cell-num">{index + 1}</td>
-                                        <td className="cell-name">
-                                            {reg.firstName} {reg.lastName}
-                                        </td>
-                                        <td className="cell-email">
-                                            <a href={`mailto:${reg.email}`}>{reg.email}</a>
-                                        </td>
-                                        <td className="cell-phone">
-                                            <a href={`tel:${reg.phone}`}>{reg.phone}</a>
-                                        </td>
+                                        {fields.map((field) => (
+                                            <td key={field.id}>
+                                                {field.type === "email" ? (
+                                                    <a href={`mailto:${reg[field.id] || ""}`}>
+                                                        {reg[field.id] || "—"}
+                                                    </a>
+                                                ) : field.type === "tel" ? (
+                                                    <a href={`tel:${reg[field.id] || ""}`}>
+                                                        {reg[field.id] || "—"}
+                                                    </a>
+                                                ) : (
+                                                    reg[field.id] || "—"
+                                                )}
+                                            </td>
+                                        ))}
                                         <td className="cell-options">
-                                            {reg.selectedOptions && reg.selectedOptions.length > 0 ? (
+                                            {reg.selectedOptions &&
+                                                reg.selectedOptions.length > 0 ? (
                                                 <div className="option-tags">
                                                     {reg.selectedOptions.map((optId) => (
                                                         <span key={optId} className="option-tag">
@@ -141,7 +159,9 @@ export default function AdminDashboard() {
                                                 <span className="no-options">Brak</span>
                                             )}
                                         </td>
-                                        <td className="cell-date">{formatDate(reg.createdAt)}</td>
+                                        <td className="cell-date">
+                                            {formatDate(reg.createdAt)}
+                                        </td>
                                     </tr>
                                 ))}
                             </tbody>
