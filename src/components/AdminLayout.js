@@ -38,7 +38,7 @@ export default function AdminLayout({ children, activeTab }) {
                         </svg>
                         Zaloguj się przez Google
                     </button>
-                    <a href="/" className="login-back-link">← Wróć do formularza</a>
+                    <a href="#/" className="login-back-link">← Wróć do formularza</a>
                 </div>
             </div>
         );
@@ -53,7 +53,7 @@ export default function AdminLayout({ children, activeTab }) {
                     <h2>Brak dostępu</h2>
                     <p>Konto <strong>{user.email}</strong> nie ma uprawnień administratora.</p>
                     <button className="btn btn-secondary" onClick={logout}>Wyloguj się</button>
-                    <a href="/" className="login-back-link">← Wróć do formularza</a>
+                    <a href="#/" className="login-back-link">← Wróć do formularza</a>
                 </div>
             </div>
         );
@@ -69,7 +69,7 @@ export default function AdminLayout({ children, activeTab }) {
                         <p className="admin-subtitle">Zalogowano jako {user.email}</p>
                     </div>
                     <div className="header-actions">
-                        <a href="/" className="btn btn-back">← Formularz</a>
+                        <a href="#/" className="btn btn-back">← Formularz</a>
                         <button className="btn btn-back" onClick={logout}>Wyloguj</button>
                     </div>
                 </div>
