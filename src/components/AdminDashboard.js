@@ -1,6 +1,7 @@
 import { useRegistrations } from "../hooks/useRegistrations";
 import { useOptions } from "../hooks/useOptions";
 import { useFormConfig } from "../hooks/useFormConfig";
+import AdminLayout from "./AdminLayout";
 import "./AdminDashboard.css";
 
 export default function AdminDashboard() {
@@ -8,13 +9,11 @@ export default function AdminDashboard() {
     const { options } = useOptions();
     const { config } = useFormConfig();
 
-    // Build a map of option IDs → names for display
     const optionNameMap = {};
     options.forEach((opt) => {
         optionNameMap[opt.id] = opt.name;
     });
 
-    // Get field definitions from config
     const fields = config?.fields || [];
 
     const formatDate = (timestamp) => {
@@ -30,90 +29,62 @@ export default function AdminDashboard() {
     };
 
     return (
-        <div className="admin-container">
-            <div className="admin-card">
-                <div className="admin-header">
-                    <div>
-                        <h1>Zgłoszenia</h1>
-                        <p className="admin-subtitle">
-                            {loading
-                                ? "Ładowanie..."
-                                : `${registrations.length} ${registrations.length === 1
-                                    ? "zgłoszenie"
-                                    : registrations.length < 5
-                                        ? "zgłoszenia"
-                                        : "zgłoszeń"
-                                }`}
-                        </p>
-                    </div>
-                    <a href="/" className="btn btn-back">
-                        ← Wróć do formularza
-                    </a>
-                </div>
-
-                {/* Options Summary */}
-                {options.length > 0 && (
-                    <div className="options-summary">
-                        <h2 className="summary-title">Podsumowanie miejsc</h2>
-                        <div className="summary-cards">
-                            {options.map((opt) => {
-                                const taken = opt.totalSpots - opt.spotsLeft;
-                                const pct =
-                                    opt.totalSpots > 0
-                                        ? (taken / opt.totalSpots) * 100
-                                        : 0;
-                                return (
-                                    <div key={opt.id} className="summary-card">
-                                        <span className="summary-name">{opt.name}</span>
-                                        <div className="summary-bar-track">
-                                            <div
-                                                className={`summary-bar-fill ${pct >= 90 ? "critical" : pct >= 60 ? "warning" : ""
-                                                    }`}
-                                                style={{ width: `${pct}%` }}
-                                            ></div>
-                                        </div>
-                                        <span className="summary-numbers">
-                                            <strong>{taken}</strong> / {opt.totalSpots} zajętych
-                                            <span className="summary-left">
-                                                (zostało {opt.spotsLeft})
-                                            </span>
-                                        </span>
+        <AdminLayout activeTab="registrations">
+            {/* Options Summary */}
+            {options.length > 0 && (
+                <div className="options-summary">
+                    <h2 className="summary-title">Podsumowanie miejsc</h2>
+                    <div className="summary-cards">
+                        {options.map((opt) => {
+                            const taken = opt.totalSpots - opt.spotsLeft;
+                            const pct = opt.totalSpots > 0 ? (taken / opt.totalSpots) * 100 : 0;
+                            return (
+                                <div key={opt.id} className="summary-card">
+                                    <span className="summary-name">{opt.name}</span>
+                                    <div className="summary-bar-track">
+                                        <div
+                                            className={`summary-bar-fill ${pct >= 90 ? "critical" : pct >= 60 ? "warning" : ""}`}
+                                            style={{ width: `${pct}%` }}
+                                        ></div>
                                     </div>
-                                );
-                            })}
-                        </div>
+                                    <span className="summary-numbers">
+                                        <strong>{taken}</strong> / {opt.totalSpots} zajętych
+                                        <span className="summary-left">(zostało {opt.spotsLeft})</span>
+                                    </span>
+                                </div>
+                            );
+                        })}
                     </div>
-                )}
+                </div>
+            )}
 
-                {/* Error */}
-                {error && (
-                    <div className="admin-error">
-                        ⚠️ Błąd ładowania zgłoszeń: {error}
-                        <br />
-                        <small>
-                            Upewnij się, że reguły Firestore pozwalają na odczyt zgłoszeń.
-                        </small>
-                    </div>
-                )}
+            {/* Error */}
+            {error && (
+                <div className="admin-error">⚠️ Błąd ładowania zgłoszeń: {error}</div>
+            )}
 
-                {/* Loading */}
-                {loading && (
-                    <div className="admin-loading">
-                        <div className="spinner"></div>
-                        <span>Ładowanie zgłoszeń...</span>
-                    </div>
-                )}
+            {/* Loading */}
+            {loading && (
+                <div className="admin-loading">
+                    <div className="spinner"></div>
+                    <span>Ładowanie zgłoszeń...</span>
+                </div>
+            )}
 
-                {/* Empty */}
-                {!loading && !error && registrations.length === 0 && (
-                    <div className="admin-empty">
-                        <span className="empty-icon">📭</span>
-                        <p>Brak zgłoszeń.</p>
-                    </div>
-                )}
+            {/* Empty */}
+            {!loading && !error && registrations.length === 0 && (
+                <div className="admin-empty">
+                    <span className="empty-icon">📭</span>
+                    <p>Brak zgłoszeń.</p>
+                </div>
+            )}
 
-                {/* Table */}
-                {!loading && !error && registrations.length > 0 && (
+            {/* Table */}
+            {!loading && !error && registrations.length > 0 && (
+                <>
+                    <p className="config-fields-label" style={{ marginBottom: "0.75rem" }}>
+                        Zgłoszenia ({registrations.length})
+                    </p>
                     <div className="table-wrapper">
                         <table className="admin-table">
                             <thead>
@@ -122,7 +93,7 @@ export default function AdminDashboard() {
                                     {fields.map((field) => (
                                         <th key={field.id}>{field.label}</th>
                                     ))}
-                                    <th>Wybrane opcje</th>
+                                    <th>Wybrana opcja</th>
                                     <th>Data</th>
                                 </tr>
                             </thead>
@@ -146,8 +117,7 @@ export default function AdminDashboard() {
                                             </td>
                                         ))}
                                         <td className="cell-options">
-                                            {reg.selectedOptions &&
-                                                reg.selectedOptions.length > 0 ? (
+                                            {reg.selectedOptions && reg.selectedOptions.length > 0 ? (
                                                 <div className="option-tags">
                                                     {reg.selectedOptions.map((optId) => (
                                                         <span key={optId} className="option-tag">
@@ -159,16 +129,14 @@ export default function AdminDashboard() {
                                                 <span className="no-options">Brak</span>
                                             )}
                                         </td>
-                                        <td className="cell-date">
-                                            {formatDate(reg.createdAt)}
-                                        </td>
+                                        <td className="cell-date">{formatDate(reg.createdAt)}</td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
                     </div>
-                )}
-            </div>
-        </div>
+                </>
+            )}
+        </AdminLayout>
     );
 }

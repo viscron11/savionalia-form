@@ -79,12 +79,27 @@ const OPTIONS = [
 ];
 
 // ============================================
+// ✏️ ADMIN EMAILS — who can access /#/admin
+// ============================================
+const ADMIN_EMAILS = [
+    "viscron11@gmail.com",
+    // Add more admin emails as needed...
+];
+
+// ============================================
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 async function seed() {
-    console.log("Seeding form config...\n");
+    console.log("Seeding admin config...\n");
+
+    await setDoc(doc(db, "config", "admins"), {
+        allowedEmails: ADMIN_EMAILS,
+    });
+    console.log(`  ✓ Admin emails: ${ADMIN_EMAILS.join(", ")}`);
+
+    console.log("\nSeeding form config...\n");
 
     await setDoc(doc(db, "config", "form"), FORM_CONFIG);
     console.log("  ✓ Form config saved");
@@ -104,7 +119,7 @@ async function seed() {
         );
     }
 
-    console.log(`\nDone! Config + ${OPTIONS.length} options created.`);
+    console.log(`\nDone! Admins + config + ${OPTIONS.length} options created.`);
     process.exit(0);
 }
 
